@@ -1,8 +1,5 @@
 #!/usr/bin/env bun
 
-// import { positionals, values } from './config/plugins/parse.plugin';
-import './config/plugins/yargs.plugin';
-
 import { yarg } from './config/plugins/yargs.plugin';
 import { ServerApp } from './presentation/server-app';
 
@@ -11,12 +8,9 @@ import { ServerApp } from './presentation/server-app';
 })();
 
 export async function main() {
-	console.log('hola mundo!!!!!');
+	console.log('hola mundo');
 
-	const t = yarg;
-	console.log(t.n);
+	const { n: nombre_curso, d: dolar, p: peso } = yarg;
 
-	// console.log({ values: values.nombre_curso, positionals });
-
-	// ServerApp.run({ nombre_curso: values.nombre_curso! });
+	ServerApp.run({ nombre_curso, dolar, peso });
 }

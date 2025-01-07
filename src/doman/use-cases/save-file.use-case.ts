@@ -12,7 +12,7 @@ export class SaveFile implements SaveFileUseCase {
 	execute({ nombre_curso }: SaveFileOptions): boolean {
 		console.log('File saved');
 		try {
-			appendFileSync('./output.txt', `\n${nombre_curso}`);
+			appendFileSync('./output.txt', `${nombre_curso}\n`);
 			return true;
 		} catch (error) {
 			console.log('Error: ', error);

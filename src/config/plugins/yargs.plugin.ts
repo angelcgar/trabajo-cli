@@ -9,6 +9,16 @@ export const yarg = yargs(hideBin(process.argv))
 		demandOption: true,
 		describe: 'Nombre del curso',
 	})
+	.option('d', {
+		alias: 'dolar',
+		type: 'number',
+		describe: 'price in dolar',
+	})
+	.option('p', {
+		alias: 'peso',
+		type: 'number',
+		describe: 'preci in peso mexicano',
+	})
 	.version('0.0.1')
 	.check((argv, option) => {
 		return true;
