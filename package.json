@@ -1,0 +1,31 @@
+{
+  "name": "bun-cli",
+  "module": "index.ts",
+  "type": "module",
+  "bin": {
+    "trabajo": "./src/app.ts"
+  },
+  "scripts": {
+    "dev": "bun run src/app.ts",
+    "dev:watch": "bun --watch --clear run src/app.ts -n 'hola'",
+    "build": "bun build ./src/app.ts --outdir ./dist",
+    "test": "vitest",
+    "bun:test": "bun test --watch",
+    "bun:coverage": "bun test --coverage",
+    "bun:build:sh": "bun build ./src/app.ts --compile --minify --outfile mycli",
+    "bun:global": "bun run bun:build:sh && cp mycli ~/.bun/bin/mycli",
+    "bun:compile": "bun build --compile --minify --target=bun-linux-x64 ./src/app.ts --outfile mycli"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/node": "^22.10.5",
+    "@biomejs/biome": "^1.9.4",
+    "@types/yargs": "^17.0.33"
+  },
+  "peerDependencies": {
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "yargs": "^17.7.2"
+  }
+}
