@@ -19,6 +19,11 @@ export const yarg = yargs(hideBin(process.argv))
 		type: 'number',
 		describe: 'preci in peso mexicano',
 	})
+	.option('f', {
+		alias: 'file',
+		type: 'string',
+		describe: 'file destination',
+	})
 	.version('0.0.1')
 	.check((argv, option) => {
 		return true;

@@ -18,9 +18,10 @@ export class CreateRow implements CreateRowUseCase {
 
 		const getFullTime = `${currentDay}-${monthFormatted}-${currentYear}`;
 
-		const dolarFormatted = dolar.toString().padStart(2, ' ');
+		const dolarFormatted = dolar.toString().padStart(3, '0');
+		const pesoFormatted = peso.toString().padStart(3, '0');
 
-		const newRow = `${getFullTime} | ${nombre_curso.padEnd(48, ' ')} | ${dolar} USD       | ${peso} MNX       | xx/xx/xx | xx/xx/xx`;
+		const newRow = `${getFullTime} | ${nombre_curso.padEnd(48, ' ')} |       ${dolarFormatted} USD |       ${pesoFormatted} MNX | xx/xx/xx | xx/xx/xx`;
 		return newRow;
 	}
 }

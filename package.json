@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "bun run src/app.ts",
-    "dev:watch": "bun --watch --clear run src/app.ts -n 'hola'",
+    "dev:watch": "bun --watch --clear run src/app.ts -n 'curso sql' -d 12 -p 150 -f pay.md",
     "build": "bun build ./src/app.ts --outdir ./dist",
     "test": "vitest",
     "bun:test": "bun test --watch",

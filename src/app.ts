@@ -10,7 +10,7 @@ import { ServerApp } from './presentation/server-app';
 export async function main() {
 	console.log('hola mundo');
 
-	const { n: nombre_curso, d: dolar, p: peso } = yarg;
+	const { n: nombre_curso, d: dolar, p: peso, f: file } = yarg;
 
-	ServerApp.run({ nombre_curso, dolar, peso });
+	ServerApp.run({ nombre_curso, dolar, peso, file });
 }
