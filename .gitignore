@@ -10,12 +10,12 @@ yarn-error.log*
 lerna-debug.log*
 .pnpm-debug.log*
 
-p.md
 output.txt
 /dist
 mycli
 size.md
 pay.md
+prueba.db
 
 # Caches
 

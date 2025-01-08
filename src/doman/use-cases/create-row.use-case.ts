@@ -8,15 +8,16 @@ export interface CreateRowOptions {
 	peso?: number;
 }
 
+// * Aqui logica de APP
 export class CreateRow implements CreateRowUseCase {
 	execute({ nombre_curso, dolar = 0, peso = 0 }: CreateRowOptions): string {
-		const currentDay = new Date().getDate().toString().padStart(2, '0');
+		const currentDay = new Date().getDate();
 		const currentMonth = new Date().getMonth();
 		const currentYear = new Date().getFullYear();
 
+		const dayFormatted = currentDay.toString().padStart(2, '0');
 		const monthFormatted = (currentMonth + 1).toString().padStart(2, '0');
-
-		const getFullTime = `${currentDay}-${monthFormatted}-${currentYear}`;
+		const getFullTime = `${dayFormatted}-${monthFormatted}-${currentYear}`;
 
 		const dolarFormatted = dolar.toString().padStart(3, '0');
 		const pesoFormatted = peso.toString().padStart(3, '0');

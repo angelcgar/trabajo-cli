@@ -8,9 +8,9 @@ import { ServerApp } from './presentation/server-app';
 })();
 
 export async function main() {
-	console.log('trabajo');
+	console.log('trabajo CLI');
 
-	const { n: nombre_curso, d: dolar, p: peso, f: file } = yarg;
+	const { n: nombre_curso, d: dolar, p: peso, f: file, sqlite } = yarg;
 
-	ServerApp.run({ nombre_curso, dolar, peso, file });
+	ServerApp.run({ nombre_curso, dolar, peso, file, sqlite });
 }

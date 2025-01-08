@@ -24,6 +24,10 @@ export const yarg = yargs(hideBin(process.argv))
 		type: 'string',
 		describe: 'file destination',
 	})
+	.option('sqlite', {
+		type: 'string',
+		describe: 'sql',
+	})
 	.version('0.0.1')
 	.check((argv, option) => {
 		return true;
