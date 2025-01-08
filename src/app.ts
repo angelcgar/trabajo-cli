@@ -8,7 +8,7 @@ import { ServerApp } from './presentation/server-app';
 })();
 
 export async function main() {
-	console.log('hola mundo');
+	console.log('trabajo');
 
 	const { n: nombre_curso, d: dolar, p: peso, f: file } = yarg;
 

@@ -11,9 +11,9 @@ interface RunOptions {
 export class ServerApp {
 	static run({ nombre_curso, dolar, peso, file }: RunOptions) {
 		const row = new CreateRow().execute({ nombre_curso, dolar, peso });
-		console.log({ row });
+		// console.log({ row });
 
 		const result = new SaveFile().execute({ row, file });
-		console.log(result);
+		// console.log(result);
 	}
 }

@@ -16,15 +16,14 @@ export class SaveFile implements SaveFileUseCase {
 Fecha      | Curso                                            | Precio (USD)  | Precio (MXN)  | inicio   | final
 -----------|--------------------------------------------------|---------------|---------------|----------|---------\n`;
 
-		console.log('File saved');
 		try {
 			if (existsSync(file)) {
 				appendFileSync(file, `${row}\n`, 'utf-8');
-				console.log('Línea añadida correctamente.');
+				console.log('File saved');
 			} else {
 				writeFileSync(file, titleHeadMd, 'utf8');
 				appendFileSync(file, `${row}\n`, 'utf-8');
-				console.log('Archivo creado.');
+				console.log('File created and append row.');
 			}
 
 			return true;
