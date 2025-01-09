@@ -10,7 +10,15 @@ import { ServerApp } from './presentation/server-app';
 export async function main() {
 	console.log('trabajo CLI');
 
-	const { n: nombre_curso, d: dolar, p: peso, f: file, sqlite, s: show } = yarg;
+	const {
+		n: nombre_curso,
+		d: dolar,
+		p: peso,
+		f: file,
+		sqlite,
+		s: show,
+		update_cell,
+	} = yarg;
 
-	ServerApp.run({ nombre_curso, dolar, peso, file, sqlite, show });
+	ServerApp.run({ nombre_curso, dolar, peso, file, sqlite, show, update_cell });
 }

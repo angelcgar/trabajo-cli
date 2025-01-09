@@ -32,6 +32,11 @@ export const yarg = yargs(hideBin(process.argv))
 		type: 'boolean',
 		describe: 'show data of table',
 	})
+	.option('update_cell', {
+		type: 'array',
+		describe:
+			'update a cell value, colum_name new_value where_id (dolar 12.60 3)',
+	})
 	.version('0.0.2')
 	.check((argv, option) => {
 		return true;

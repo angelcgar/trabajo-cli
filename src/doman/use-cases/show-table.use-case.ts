@@ -17,8 +17,7 @@ interface Data {
 	peso: string;
 }
 export class ShowTable implements ShowTableUseCase {
-	public db = new Database('prueba.db', { readonly: true });
-
+	private db = new Database('prueba.db', { readonly: true });
 	private nameDB = 'data';
 
 	execute({ show }: ShowTableOptions): void {
