@@ -1,5 +1,7 @@
 import { Database, type SQLQueryBindings } from 'bun:sqlite';
 import { truncateString } from '../../utils';
+import { ProductionCLI } from './production-cli.use-case';
+import { Logger } from '../../config/plugins/logger.plugin';
 
 interface ShowTableUseCase {
 	execute: (showTableOptions: ShowTableOptions) => void;
@@ -17,8 +19,12 @@ interface Data {
 	peso: string;
 }
 export class ShowTable implements ShowTableUseCase {
-	private db = new Database('prueba.db', { readonly: true });
-	private nameDB = 'data';
+	constructor(private logger: Logger = new Logger()) {}
+
+	private productionCLI: ProductionCLI = new ProductionCLI();
+
+	private db = new Database(this.productionCLI.padDataBase, { readonly: true });
+	private nameDB = this.productionCLI.nameDb;
 
 	execute({ show }: ShowTableOptions): void {
 		const query = this.db.prepare<Data, SQLQueryBindings[]>(
@@ -32,7 +38,7 @@ export class ShowTable implements ShowTableUseCase {
 			'DOLAR',
 			'PESO',
 		);
-		console.log('-'.repeat(52));
+		this.logger.log('-'.repeat(52));
 		for (const element of query.all()) {
 			console.log(
 				element.id.toString().padEnd(3, ' '),

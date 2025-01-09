@@ -1,6 +1,7 @@
 import { Logger } from '../config/plugins/logger.plugin';
 import { CreateRow } from '../doman/use-cases/create-row.use-case';
 import { DeleteTable } from '../doman/use-cases/delete-table.use-case';
+import { ProductionCLI } from '../doman/use-cases/production-cli.use-case';
 import { SaveFile } from '../doman/use-cases/save-file.use-case';
 import { SaveTable } from '../doman/use-cases/save-table.use-case';
 import { ShowTable } from '../doman/use-cases/show-table.use-case';
@@ -31,6 +32,9 @@ export class ServerApp {
 		update_cell,
 		delete_row,
 	}: RunOptions): void {
+		// Esto tiene que ser un middlewere
+		new ProductionCLI().execute();
+
 		if (nombre_curso) {
 			console.log('\x1b[34m%s\x1b[0m', 'Logica con sqlite');
 			new SaveTable().execute({ nombre_curso, dolar, peso });

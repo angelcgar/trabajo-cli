@@ -1,6 +1,7 @@
 import { Database } from 'bun:sqlite';
 
 import { Logger } from '../../config/plugins/logger.plugin';
+import { ProductionCLI } from './production-cli.use-case';
 
 interface DeleteTableUseCase {
 	execute: (deleteTableOptions: DeleteTableOptions) => void;
@@ -13,8 +14,10 @@ interface DeleteTableOptions {
 export class DeleteTable implements DeleteTableUseCase {
 	constructor(private logger: Logger = new Logger()) {}
 
-	private db = new Database('prueba.db');
-	private nameDB = 'data';
+	private productionCLI: ProductionCLI = new ProductionCLI();
+
+	private db = new Database(this.productionCLI.padDataBase);
+	private nameDB = this.productionCLI.nameDb;
 
 	execute({ delete_row }: DeleteTableOptions): void {
 		const querySQL = `DELETE FROM ${this.nameDB} WHERE id = ${delete_row};`;

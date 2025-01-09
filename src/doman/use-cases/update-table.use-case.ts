@@ -2,6 +2,7 @@ import { Database, type SQLQueryBindings } from 'bun:sqlite';
 
 import { Logger } from '../../config/plugins/logger.plugin';
 import { truncateString } from '../../utils';
+import { ProductionCLI } from './production-cli.use-case';
 
 interface UpdateTableUseCase {
 	execute: (updateTableOptions: UpdateTableOptions) => void;
@@ -22,8 +23,12 @@ interface Data {
 export class UpdateTable implements UpdateTableUseCase {
 	constructor(private logger: Logger = new Logger()) {}
 
-	private db = new Database('prueba.db', { readwrite: true });
-	private nameDB = 'data';
+	private productionCLI: ProductionCLI = new ProductionCLI();
+
+	private db = new Database(this.productionCLI.padDataBase, {
+		readwrite: true,
+	});
+	private nameDB = this.productionCLI.nameDb;
 
 	execute({ update_cell }: UpdateTableOptions): void {
 		const columName = update_cell[0];

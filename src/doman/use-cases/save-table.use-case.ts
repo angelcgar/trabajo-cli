@@ -3,6 +3,9 @@ import { Database } from 'bun:sqlite';
 import { currencyFormat } from '../../utils/currencyFormat';
 import { getFullTime } from '../../utils';
 
+import { ProductionCLI } from './production-cli.use-case';
+import { Logger } from '../../config/plugins/logger.plugin';
+
 interface SaveTableUseCase {
 	execute: (options: SaveTableOptions) => void;
 }
@@ -14,22 +17,28 @@ export interface SaveTableOptions {
 }
 
 export class SaveTable implements SaveTableUseCase {
-	public db = new Database('prueba.db', { create: true });
-	public nameDB = 'data';
+	constructor(private logger: Logger = new Logger()) {}
+
+	private productionCLI: ProductionCLI = new ProductionCLI();
+
+	private db = new Database(this.productionCLI.padDataBase, { create: true });
+	private nameDB = this.productionCLI.nameDb;
+
 	public dolarTemp?: string;
 	public pesoTemp?: string;
 
 	execute({ nombre_curso, dolar, peso }: SaveTableOptions): void {
+		console.log(this.productionCLI.padDataBase, this.productionCLI.nameDb);
 		this.db.exec(`
-  CREATE TABLE IF NOT EXISTS ${this.nameDB} (
-	id INTEGER PRIMARY KEY,
-	uuid TEXT NOT NULL,
-	fecha_compra TEXT NOT NULL,
-	name_course TEXT NOT NULL,
-	dolar TEXT,
-	peso TEXT
-) STRICT;
-`);
+		  CREATE TABLE IF NOT EXISTS ${this.nameDB} (
+			id INTEGER PRIMARY KEY,
+			uuid TEXT NOT NULL,
+			fecha_compra TEXT NOT NULL,
+			name_course TEXT NOT NULL,
+			dolar TEXT,
+			peso TEXT
+		) STRICT;
+		`);
 
 		this.dolarTemp = dolar?.toString() ?? '0';
 		this.pesoTemp = peso?.toString() ?? '0';
@@ -47,7 +56,7 @@ export class SaveTable implements SaveTableUseCase {
 
 		// const query = this.db.prepare(`SELECT * FROM ${this.nameDB} ORDER BY id`);
 
-		console.log('\x1b[32m%s\x1b[0m', 'Save in Table');
+		this.logger.success('Save in Table');
 	}
 
 	generateHash() {
