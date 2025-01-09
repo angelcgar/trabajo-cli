@@ -27,20 +27,14 @@ export class ServerApp {
 			new SaveTable().execute({ nombre_curso, dolar, peso });
 		}
 
-		if (nombre_curso) {
+		if (nombre_curso && file) {
 			console.log('\x1b[34m%s\x1b[0m', 'Logica con file');
 			const row = new CreateRow().execute({ nombre_curso, dolar, peso });
 			const result = new SaveFile().execute({ row, file });
-			// console.log(result);
 		}
-		// console.log({ row });
-
-		// console.log({ row, file });
-		// console.log(result);
 
 		if (sqlite) {
 			console.log({ sqlite });
-			// const result = new SaveSqlite().execute({})
 		}
 
 		if (show) {

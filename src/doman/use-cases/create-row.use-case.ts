@@ -1,3 +1,5 @@
+import { currencyFormat, getFullTime } from '../../utils';
+
 export interface CreateRowUseCase {
 	execute(options: CreateRowOptions): string;
 }
@@ -11,18 +13,8 @@ export interface CreateRowOptions {
 // * Aqui logica de APP
 export class CreateRow implements CreateRowUseCase {
 	execute({ nombre_curso, dolar = 0, peso = 0 }: CreateRowOptions): string {
-		const currentDay = new Date().getDate();
-		const currentMonth = new Date().getMonth();
-		const currentYear = new Date().getFullYear();
+		const newRow = `${getFullTime} | ${nombre_curso.padEnd(48, ' ')} |         ${currencyFormat(dolar)} |        ${currencyFormat(peso)} | xx/xx/xx | xx/xx/xx`;
 
-		const dayFormatted = currentDay.toString().padStart(2, '0');
-		const monthFormatted = (currentMonth + 1).toString().padStart(2, '0');
-		const getFullTime = `${dayFormatted}-${monthFormatted}-${currentYear}`;
-
-		const dolarFormatted = dolar.toString().padStart(3, '0');
-		const pesoFormatted = peso.toString().padStart(3, '0');
-
-		const newRow = `${getFullTime} | ${nombre_curso.padEnd(48, ' ')} |       ${dolarFormatted} USD |       ${pesoFormatted} MNX | xx/xx/xx | xx/xx/xx`;
 		return newRow;
 	}
 }

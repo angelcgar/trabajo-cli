@@ -10,19 +10,23 @@ export interface SaveFileOptions {
 }
 
 export class SaveFile implements SaveFileUseCase {
-	execute({ row, file = './output.txt' }: SaveFileOptions): boolean {
+	public filePadSystem = './output.txt';
+	public filePad?: string;
+
+	execute({ row, file }: SaveFileOptions): boolean {
 		const titleHeadMd = `Tabla de registro de cursos
 
 Fecha      | Curso                                            | Precio (USD)  | Precio (MXN)  | inicio   | final
 -----------|--------------------------------------------------|---------------|---------------|----------|---------\n`;
 
+		this.filePad = file ?? this.filePadSystem;
 		try {
-			if (existsSync(file)) {
-				appendFileSync(file, `${row}\n`, 'utf-8');
+			if (existsSync(this.filePad)) {
+				appendFileSync(this.filePad, `${row}\n`, 'utf-8');
 				console.log('\x1b[32m%s\x1b[0m', 'Save in File');
 			} else {
-				writeFileSync(file, titleHeadMd, 'utf8');
-				appendFileSync(file, `${row}\n`, 'utf-8');
+				writeFileSync(this.filePad, titleHeadMd, 'utf8');
+				appendFileSync(this.filePad, `${row}\n`, 'utf-8');
 				console.log('File created and append row.');
 			}
 
