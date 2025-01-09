@@ -40,7 +40,7 @@ export class UpdateTable implements UpdateTableUseCase {
 				'DOLAR',
 				'PESO',
 			);
-			console.log('-'.repeat(52));
+			this.logger.log('-'.repeat(52));
 			const y = this.db.prepare<Data, SQLQueryBindings[]>(
 				'SELECT * FROM data WHERE id = ?',
 			);

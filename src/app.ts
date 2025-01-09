@@ -18,7 +18,17 @@ export async function main() {
 		sqlite,
 		s: show,
 		update_cell,
+		delete_row,
 	} = yarg;
 
-	ServerApp.run({ nombre_curso, dolar, peso, file, sqlite, show, update_cell });
+	new ServerApp().run({
+		nombre_curso,
+		dolar,
+		peso,
+		file,
+		sqlite,
+		show,
+		update_cell,
+		delete_row,
+	});
 }

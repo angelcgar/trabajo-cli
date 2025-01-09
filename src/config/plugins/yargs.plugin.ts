@@ -37,7 +37,11 @@ export const yarg = yargs(hideBin(process.argv))
 		describe:
 			'update a cell value, colum_name new_value where_id (dolar 12.60 3)',
 	})
-	.version('0.0.2')
+	.option('delete_row', {
+		type: 'number',
+		describe: 'delete row in DB',
+	})
+	.version('0.0.3')
 	.check((argv, option) => {
 		return true;
 	})

@@ -1,4 +1,6 @@
+import { Logger } from '../config/plugins/logger.plugin';
 import { CreateRow } from '../doman/use-cases/create-row.use-case';
+import { DeleteTable } from '../doman/use-cases/delete-table.use-case';
 import { SaveFile } from '../doman/use-cases/save-file.use-case';
 import { SaveTable } from '../doman/use-cases/save-table.use-case';
 import { ShowTable } from '../doman/use-cases/show-table.use-case';
@@ -12,11 +14,14 @@ interface RunOptions {
 	sqlite?: number;
 	show?: boolean;
 	update_cell?: (string | number)[];
+	delete_row?: number;
 }
 
 // * Aqui logica de negocio
 export class ServerApp {
-	static run({
+	constructor(private logger: Logger = new Logger()) {}
+
+	run({
 		nombre_curso,
 		dolar,
 		peso,
@@ -24,6 +29,7 @@ export class ServerApp {
 		sqlite,
 		show,
 		update_cell,
+		delete_row,
 	}: RunOptions): void {
 		if (nombre_curso) {
 			console.log('\x1b[34m%s\x1b[0m', 'Logica con sqlite');
@@ -53,6 +59,13 @@ export class ServerApp {
 			console.log('\x1b[34m%s\x1b[0m', 'Update DB');
 
 			new UpdateTable().execute({ update_cell });
+		}
+
+		if (delete_row) {
+			if (typeof delete_row !== 'number') {
+				return;
+			}
+			new DeleteTable().execute({ delete_row });
 		}
 	}
 }
