@@ -1,5 +1,4 @@
 import { Database } from 'bun:sqlite';
-import { Console } from 'node:console';
 
 interface SaveTableUseCase {
 	execute: (options: SaveTableOptions) => void;
@@ -44,16 +43,9 @@ export class SaveTable implements SaveTableUseCase {
 			`INSERT INTO ${this.nameDB} (fecha_compra, name_course) VALUES ( ?, ? )`,
 		);
 		insert.run(eventDate, nombre_curso);
-		// insert.run(eventDate, nombre_curso);
+
 		const query = this.db.prepare(`SELECT * FROM ${this.nameDB} ORDER BY id`);
-		console.table(query.all());
 
-		// colors
-
-		console.log('Save Table');
-		console.log('\x1b[31m%s\x1b[0m', 'Esto es rojo');
-		console.log('\x1b[32m%s\x1b[0m', 'Esto es verde');
-
-		console.log('\x1b[34m%s\x1b[0m', 'Esto es azul');
+		console.log('\x1b[32m%s\x1b[0m', 'Save in Table');
 	}
 }

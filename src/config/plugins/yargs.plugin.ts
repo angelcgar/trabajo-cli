@@ -6,7 +6,6 @@ export const yarg = yargs(hideBin(process.argv))
 	.option('n', {
 		alias: 'nombre_curso',
 		type: 'string',
-		demandOption: true,
 		describe: 'Nombre del curso',
 	})
 	.option('d', {
@@ -25,10 +24,15 @@ export const yarg = yargs(hideBin(process.argv))
 		describe: 'file destination',
 	})
 	.option('sqlite', {
-		type: 'string',
+		type: 'count',
 		describe: 'sql',
 	})
-	.version('0.0.1')
+	.option('s', {
+		alias: 'show',
+		type: 'boolean',
+		describe: 'show data of table',
+	})
+	.version('0.0.2')
 	.check((argv, option) => {
 		return true;
 	})

@@ -19,7 +19,7 @@ Fecha      | Curso                                            | Precio (USD)  | 
 		try {
 			if (existsSync(file)) {
 				appendFileSync(file, `${row}\n`, 'utf-8');
-				console.log('File saved');
+				console.log('\x1b[32m%s\x1b[0m', 'Save in File');
 			} else {
 				writeFileSync(file, titleHeadMd, 'utf8');
 				appendFileSync(file, `${row}\n`, 'utf-8');
