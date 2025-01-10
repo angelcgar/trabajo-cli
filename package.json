@@ -3,12 +3,12 @@
   "module": "index.ts",
   "type": "module",
   "bin": {
-    "trabajo": "./src/app.ts"
+    "trabajo": "./dist/app.js"
   },
   "scripts": {
     "dev": "bun run src/app.ts -n 'curso sql de midudev'",
-    "dev:watch": "bun --watch --clear run src/app.ts -n 'curso sql' -d 12 -p 150 -f output.txt --sqlite 'hola sqlite'",
-    "build": "bun build ./src/app.ts --outdir ./dist",
+    "dev:watch": "bun --watch --clear run src/app.ts -n 'Build'",
+    "build": "bun build --target=bun ./src/app.ts --outdir ./dist",
     "test": "vitest",
     "bun:test": "bun test --watch",
     "bun:coverage": "bun test --coverage",
@@ -23,7 +23,7 @@
     "@types/yargs": "^17.0.33"
   },
   "peerDependencies": {
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.3"
   },
   "dependencies": {
     "yargs": "^17.7.2"
